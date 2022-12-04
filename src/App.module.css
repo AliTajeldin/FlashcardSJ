@@ -23,10 +23,32 @@
   border: 1px solid white;
 }
 
-.Answer {
-  height: 2rem;
+.Answers {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+
+  height: 5vh;
   text-align: center;
   border: 1px solid white;
-  background-color: blue;
+}
 
+.Answer {
+  flex-grow: 1;
+  min-width: 100px;
+  color: white;
+}
+
+.AnswerYes {
+  composes: Answer;
+  background-color: green;
+}
+
+.AnswerNo {
+  composes: Answer;
+  background-color: red;
+}
+.AnswerNo:disabled {
+  background-color: darkred;
+  color: grey;
 }
