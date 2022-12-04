@@ -1,13 +1,32 @@
 .App {
-  text-align: center;
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
   color: white;
 }
 
+.Narrow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 
+  width: 50vw;
+  min-width: 400px;
+  max-width: 600px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+
+.Item {
+  flex-grow: 1;
+  text-align: center;
+  border: 1px solid white;
+}
+
+.Answer {
+  height: 2rem;
+  text-align: center;
+  border: 1px solid white;
+  background-color: blue;
+
+}
