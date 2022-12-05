@@ -27,13 +27,27 @@ const App: Component = () => {
     setShowAnswer(!showAnswer());
   }
 
+  const Item = (props: any) => {
+    return <div class={styles.Item}>
+      <div class={styles.ItemLabel}>
+        {props.label}
+      </div>
+      <Show when={props.show}>
+        <div class={styles.ItemValue}>
+          <p>{props.value}</p>
+        </div>
+      </Show>
+    </div>
+  }
+
   return (
     <div class={styles.App}>
       <div class={styles.Narrow}>
         <Show when={card()} fallback={<div>Loading...</div>}>
-          <div class={styles.Item}>{card()!.item1}</div>
-          <div class={styles.Item}>{showAnswer() ? card()!.item2 : ""}</div>
+          <Item label={card()!.item1Label} value={card()!.item1} show={true}/>
+          <Item label={card()!.item2Label} value={card()!.item2} show={showAnswer()}/>
           <div class={styles.Answers}>
+            <button class={styles.AnswerOpt}>⚙</button>
             <button class={styles.AnswerNo} disabled={!showAnswer()} onClick={answerYes}>✖︎</button>
             <button class={styles.AnswerYes} onClick={answerYes}>✔︎</button>
           </div>

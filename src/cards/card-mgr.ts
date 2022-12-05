@@ -11,22 +11,16 @@ export class CardMgr {
   }
 
   static async create(cardSet: string) {
-    console.log('CardMgrFactory:', cardSet);
-
-    // await new Promise(r => setTimeout(r, 200));
+    // await new Promise(r => setTimeout(r, 500));
 
     // @ts-ignore
-    // const cards = (await import('./sp-en.csv')).default;
-    const cards = (await import('@/assets/sp-en.csv')).default;
-    console.log("cards", cards);
-    // console.log("fooCSV: ", fooCSV);
-    
+    const cards = (await import('@/assets/sp-en.csv')).default;    
     return new CardMgr(cards);
   }
 
   getNextCard() {
     count = count + 1;
     const idx = count % this.cards.length;
-    return new Card(idx, this.cards[idx].sp, this.cards[idx].en, 0);
+    return new Card(idx, "Espanol", this.cards[idx].sp, "English", this.cards[idx].en, 0);
   }
 }
