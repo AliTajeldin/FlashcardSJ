@@ -7,18 +7,14 @@ export interface OptionsT {
   invert: boolean,
 }
 
-interface OptionsPropsT {
-  onExit: (opts: OptionsT) => void,
-}
-
 const [opts, setOpts] = createSignal<OptionsT>({
   clickOnce: true,
   invert: false,
 });
 
-export { opts as appOptions};
+export { opts as appOptions };
 
-export const Options: Component<OptionsPropsT> = (props) => {
+export const Options: Component<{ onExit: () => void }> = (props) => {
   const { onExit } = props;
 
   const updateOption = (optName: string, optValue: boolean) => {
@@ -43,7 +39,7 @@ export const Options: Component<OptionsPropsT> = (props) => {
       <div class={styles.Overlay}></div>
       <div class={styles.OptionsModal}>
         <div class={styles.Header}>
-          <div><button class={styles.Exit} onClick={() => (onExit?.(opts()))}>X</button>
+          <div><button class={styles.Exit} onClick={() => (onExit?.())}>X</button>
           </div>
           <div class={styles.Title}>Options</div>
         </div>

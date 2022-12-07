@@ -1,4 +1,4 @@
-import { Component, createEffect, createResource, createSignal, Show } from 'solid-js';
+import { Component, createEffect, createResource, createSignal, Show, on } from 'solid-js';
 
 import styles from './App.module.css';
 import { Card, CardMgr } from './cards';
@@ -21,11 +21,12 @@ const App: Component = () => {
     loadNextCard();
   });
 
+  // Always show answers if click-one option is set.
+  createEffect(on(appOptions, (opts) => opts.clickOnce && setShowAnswer(true)));
+
   const answerYes = () => {
-    if (showAnswer()) {
-      loadNextCard();
-    }
-    setShowAnswer(!showAnswer());
+    showAnswer() && loadNextCard();
+    appOptions().clickOnce || setShowAnswer(!showAnswer());
   }
 
   const Item = (props: any) => {
@@ -33,7 +34,7 @@ const App: Component = () => {
       <div class={styles.ItemLabel}>
         {props.label}
       </div>
-      <div>{JSON.stringify( appOptions())}</div>
+      <div>{JSON.stringify(appOptions())}</div>
       <Show when={props.show}>
         <div class={styles.ItemValue}>
           <p>{props.value}</p>
@@ -46,15 +47,15 @@ const App: Component = () => {
     <div class={styles.App}>
       <div class={styles.Narrow}>
         <Show when={card()} fallback={<div>Loading...</div>}>
-          <Item label={card()!.item1Label} value={card()!.item1} show={true}/>
-          <Item label={card()!.item2Label} value={card()!.item2} show={showAnswer()}/>
+          <Item label={card()!.item1Label} value={card()!.item1} show={true} />
+          <Item label={card()!.item2Label} value={card()!.item2} show={showAnswer()} />
           <div class={styles.Answers}>
             <button class={styles.AnswerOpt} onClick={() => setShowOptions(true)}>⚙</button>
             <button class={styles.AnswerNo} disabled={!showAnswer()} onClick={answerYes}>✖︎</button>
             <button class={styles.AnswerYes} onClick={answerYes}>✔︎</button>
           </div>
           <Show when={showOptions()}>
-            <Options onExit={(o) => setShowOptions(false)}/>
+            <Options onExit={() => setShowOptions(false)} />
           </Show>
         </Show>
       </div>
