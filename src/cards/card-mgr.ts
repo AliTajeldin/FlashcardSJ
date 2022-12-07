@@ -18,9 +18,13 @@ export class CardMgr {
     return new CardMgr(cards);
   }
 
-  getNextCard() {
+  getNextCard(invert: boolean) {
     count = count + 1;
     const idx = count % this.cards.length;
+    // clean this up so it uses the cardset config instead of hardcoding / duplicating!
+    if (invert) {
+      return new Card(idx, "English", this.cards[idx].en, "Espanol", this.cards[idx].sp, 0);
+    }
     return new Card(idx, "Espanol", this.cards[idx].sp, "English", this.cards[idx].en, 0);
   }
 }

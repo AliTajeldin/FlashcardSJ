@@ -36,7 +36,7 @@ export const Options: Component<{ onExit: () => void }> = (props) => {
 
   return (
     <>
-      <div class={styles.Overlay}></div>
+      {/* <div class={styles.Overlay}></div> */}
       <div class={styles.OptionsModal}>
         <div class={styles.Header}>
           <div><button class={styles.Exit} onClick={() => (onExit?.())}>X</button>

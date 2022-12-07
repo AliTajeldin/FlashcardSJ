@@ -13,13 +13,12 @@ const App: Component = () => {
 
   const loadNextCard = () => {
     if (cardMgr.state === 'ready') {
-      setCard(cardMgr().getNextCard())
+      setCard(cardMgr().getNextCard(appOptions().invert))
     }
   }
 
-  createEffect(() => {
-    loadNextCard();
-  });
+  // loads a new card when card manager changes or becomes ready.
+  createEffect(on(cardMgr, (cm) => loadNextCard()));
 
   // Always show answers if click-one option is set.
   createEffect(on(appOptions, (opts) => opts.clickOnce && setShowAnswer(true)));
@@ -34,7 +33,6 @@ const App: Component = () => {
       <div class={styles.ItemLabel}>
         {props.label}
       </div>
-      <div>{JSON.stringify(appOptions())}</div>
       <Show when={props.show}>
         <div class={styles.ItemValue}>
           <p>{props.value}</p>
@@ -50,7 +48,7 @@ const App: Component = () => {
           <Item label={card()!.item1Label} value={card()!.item1} show={true} />
           <Item label={card()!.item2Label} value={card()!.item2} show={showAnswer()} />
           <div class={styles.Answers}>
-            <button class={styles.AnswerOpt} onClick={() => setShowOptions(true)}>⚙</button>
+            <button class={styles.AnswerOpt} onClick={() => setShowOptions(!showOptions())}>⚙</button>
             <button class={styles.AnswerNo} disabled={!showAnswer()} onClick={answerYes}>✖︎</button>
             <button class={styles.AnswerYes} onClick={answerYes}>✔︎</button>
           </div>
