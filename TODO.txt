@@ -2,4 +2,4 @@
 * show label per item (e.g. english / spanish)
 * allow invert items (shows second item first, etc)
 * save user selected options above into browser storage.
-
+* ESC should also dismiss options modal.
