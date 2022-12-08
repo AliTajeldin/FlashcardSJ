@@ -1,12 +1,14 @@
 import { Component, createEffect, createResource, createSignal, Show, on } from 'solid-js';
 
 import styles from './App.module.css';
-import { Card, CardMgr } from './cards';
+import { Card } from './cards/card';
+import { CardMgr } from './cards/card-mgr';
+import { cardSetConfigs } from './cards/cardset-config';
 import { Options, appOptions } from './Options';
 
 const App: Component = () => {
-  const [cardSet, setCardSet] = createSignal("sp-en");
-  const [cardMgr] = createResource(cardSet, CardMgr.create);
+  const [cardSetId, setCardSetId] = createSignal("sp-en");
+  const [cardMgr] = createResource(cardSetId, CardMgr.create);
   const [card, setCard] = createSignal<Card | null>(null);
   const [showAnswer, setShowAnswer] = createSignal(false);
   const [showOptions, setShowOptions] = createSignal(false);
@@ -75,12 +77,14 @@ const App: Component = () => {
   return (
     <div class={styles.App}>
       <div class={styles.Narrow}>
-        <Show when={card()} fallback={<div>Loading...</div>}>
-          <Header />
-          <Item label={card()!.item1Label} value={card()!.item1} show={true} />
-          <Item label={card()!.item2Label} value={card()!.item2} show={showAnswer()} />
-          <Footer />
-          <OptionsModal />
+        <Show when={card()} fallback={<div>Loading...</div>} keyed>
+          {(c: Card) => (<>
+            <Header />
+            <Item label={c.item1Label} value={c.item1} show={true} />
+            <Item label={c.item2Label} value={c.item2} show={showAnswer()} />
+            <Footer />
+            <OptionsModal />
+          </>)}
         </Show>
       </div>
     </div>
