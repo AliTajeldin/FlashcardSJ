@@ -1,5 +1,5 @@
-* allow 1 phase option so both items are shown at once (reduces clicks)
-* allow invert items (shows second item first, etc)
 * save user selected options above into browser storage.
 * ESC should also dismiss options modal.
-* add multi cardsets (sp-en, mini-sp-en, thai-en)
+* maintain current card score in browser storage.
+* deploy to netlify
+* handle ";" as return in paragraph.

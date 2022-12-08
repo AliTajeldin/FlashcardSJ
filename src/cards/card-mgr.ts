@@ -1,8 +1,6 @@
 import { Card } from "./card";
 import { loadCards } from "./cardset-config";
 
-let count = 0;
-
 export class CardMgr {
   cardSetId: string;
   cards: Array<any>;
@@ -22,8 +20,8 @@ export class CardMgr {
   }
 
   getNextCard(invert: boolean) : Card {
-    count = count + 1;
-    const idx = count % this.cards.length;
+    
+    const idx = Math.floor(Math.random() *  this.cards.length);
     const a = this.cards[idx].a;
     const b = this.cards[idx].b;
     // clean this up so it uses the cardset config instead of hardcoding / duplicating!

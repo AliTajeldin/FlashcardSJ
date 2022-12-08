@@ -33,7 +33,7 @@ const App: Component = () => {
   const Item = (props: any) => {
     return <div class={styles.Item}>
       <div class={styles.ItemLabel}>
-        {props.label}
+        {props.label} - {props.idx}
       </div>
       <Show when={props.show}>
         <div class={styles.ItemValue}>
@@ -84,8 +84,8 @@ const App: Component = () => {
         <Show when={card()} fallback={<div>Loading...</div>} keyed>
           {(c: Card) => (<>
             <Header />
-            <Item label={c.item1Label} value={c.item1} show={true} />
-            <Item label={c.item2Label} value={c.item2} show={showAnswer()} />
+            <Item label={c.item1Label} value={c.item1} idx={c.idx} show={true} />
+            <Item label={c.item2Label} value={c.item2} idx={c.idx} show={showAnswer()} />
             <Footer />
             <OptionsModal />
           </>)}

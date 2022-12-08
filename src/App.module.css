@@ -1,5 +1,13 @@
 @value app_bg: #282c34;
 @value app_fg: white;
+/* @value no_bg: #C06962; */
+@value no_bg: red;
+/* @value yes_bg: #BADA96; */
+@value yes_bg: green;
+/* @value opt_bg: #A283A0; */
+@value opt_bg: navy;
+@value sub_yellow: #F8F2B3;
+@value sub_peach: #F1C9A9;
 
 .App {
   background-color: app_bg;
@@ -84,12 +92,14 @@
 
 .AnswerYes {
   composes: Answer;
-  background-color: green;
+  /* background-color: green; */
+  background-color: yes_bg;
 }
 
 .AnswerNo {
   composes: Answer;
-  background-color: red;
+  background-color: no_bg;
+  /* background-color: red; */
 }
 .AnswerNo:disabled {
   background-color: darkred;
@@ -101,5 +111,6 @@
 .AnswerOpt {
   composes: Answer;
   flex-grow: 0;
-  background-color: navy;
+  /* background-color: navy; */
+  background-color: opt_bg;
 }
