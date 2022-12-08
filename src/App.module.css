@@ -1,7 +1,9 @@
+@value app_bg: #282c34;
+@value app_fg: white;
+
 .App {
-  background-color: #282c34;
-  /* font-size: calc(10px + 2vmin); */
-  color: white;
+  background-color: app_bg;
+  color: app_fg;
 }
 
 .Narrow {
@@ -18,14 +20,35 @@
   position: relative;
 }
 
+.Header {
+  flex-grow: 10;
+  border: 1px solid app_fg;
+  font-size: 1.5rem;
+  text-align: center;
+
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: stretch;
+}
+
+.CardSetSelect {
+  /* border: none; */
+  outline: 0px;
+  flex-grow: 1;
+  background-color: app_bg;
+  color: app_fg;
+  font-size: 1.4rem;
+  text-align: center;
+}
 
 .Item {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-
-  flex-grow: 1;
-  border: 1px solid white;
+  height: 45vh;
+  height: 45dvh;
+  border: 1px solid app_fg;
 }
 
 .ItemLabel {
@@ -41,7 +64,6 @@
   flex-grow: 1;
   text-align: center;
   font-size: 1.5rem;
-  /* background-color: darkmagenta; */
 }
 
 .Answers {
@@ -49,9 +71,9 @@
   flex-direction: row;
   align-items: stretch;
 
-  height: 5vh;
+  flex-grow: 1;
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid app_fg;
 }
 
 .Answer {
