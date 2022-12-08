@@ -1,4 +1,5 @@
 import { Card } from "./card";
+import { loadCards } from "./cardset-config";
 
 let count = 0;
 
@@ -12,10 +13,11 @@ export class CardMgr {
   }
 
   static async create(cardSetId: string) {
-    // await new Promise(r => setTimeout(r, 500));
+    console.log("Loading a new CardMgr!");
+    
+    // await new Promise(r => setTimeout(r, 300));
 
-    // @ts-ignore
-    const cards = (await import('@/assets/sp-en.csv')).default;    
+    const cards = (await loadCards(cardSetId)).default;    
     return new CardMgr(cardSetId, cards);
   }
 

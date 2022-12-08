@@ -1,4 +1,4 @@
-import { Component, createEffect, createResource, createSignal, Show, on } from 'solid-js';
+import { Component, createEffect, createResource, createSignal, Show, on, For } from 'solid-js';
 
 import styles from './App.module.css';
 import { Card } from './cards/card';
@@ -7,7 +7,7 @@ import { cardSetConfigs } from './cards/cardset-config';
 import { Options, appOptions } from './Options';
 
 const App: Component = () => {
-  const [cardSetId, setCardSetId] = createSignal("sp-en");
+  const [cardSetId, setCardSetId] = createSignal(cardSetConfigs[0].id);
   const [cardMgr] = createResource(cardSetId, CardMgr.create);
   const [card, setCard] = createSignal<Card | null>(null);
   const [showAnswer, setShowAnswer] = createSignal(false);
@@ -20,7 +20,7 @@ const App: Component = () => {
   }
 
   // loads a new card when card manager changes or becomes ready.
-  createEffect(on(cardMgr, (cm) => loadNextCard()));
+  createEffect(on(cardMgr, (cm) => { loadNextCard() }));
 
   // Always show answers if click-one option is set.
   createEffect(on(appOptions, (opts) => opts.clickOnce && setShowAnswer(true)));
@@ -43,14 +43,18 @@ const App: Component = () => {
     </div>
   }
 
+  const handleCardSetChange = (newCardSetId: string) => {
+    setCard(null);
+    setCardSetId(newCardSetId);
+  }
+
   const Header: Component = () => {
     return (
       <div class={styles.Header}>
-        <select name="cardset" id="cardset" class={styles.CardSetSelect}>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option>
+        <select name="cardset" id="cardset" class={styles.CardSetSelect} onChange={(e) => handleCardSetChange(e.currentTarget.value)}>
+          <For each={cardSetConfigs}>
+            {(config) => <option value={config.id} selected={config.id === cardSetId()}>{config.title}</option> }
+          </For>
         </select>
       </div>
     );

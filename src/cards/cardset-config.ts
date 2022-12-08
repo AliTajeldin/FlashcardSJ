@@ -27,3 +27,18 @@ export const cardSetConfigs : cardSetConfigT[] = [
 ];
 
 export const cardSetConfigById = Object.fromEntries(cardSetConfigs.map(c => [c.id, c]));
+
+export const loadCards = (cardSetId: string) => {
+  // note: must explicitly specify the name of csv files here so that vite can bundle the transformed files.
+
+  // @ts-ignore
+  if (cardSetId === "sp-en") return import('@/assets/sp-en.csv');
+
+  // @ts-ignore
+  if (cardSetId === "th-en") return import('@/assets/th-en.csv');
+
+  // @ts-ignore
+  if (cardSetId === "mini") return import('@/assets/mini.csv');
+
+  throw new Error(`unknown carset id to load: ${cardSetId}`);
+}
