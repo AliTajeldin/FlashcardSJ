@@ -3,3 +3,10 @@
 * maintain current card score in browser storage.
 * deploy to netlify
 * handle ";" as return in paragraph.
+* add "reshowBanLen" as a param to the config of a cardset.
+* don't erase screen on "loading...". just change card value to "loading". avoids flash on slow load.
+
+Possible Cardsets:
+* country / capital
+* country / flag
+* 
