@@ -31,13 +31,16 @@ const App: Component = () => {
   }
 
   const Item = (props: any) => {
+    const lines = (props.value as string).split(";")
     return <div class={styles.Item}>
       <div class={styles.ItemLabel}>
         {props.label} - {props.idx}
       </div>
       <Show when={props.show}>
         <div class={styles.ItemValue}>
-          <p>{props.value}</p>
+          <div>
+            {lines.map(l => <p>{l}</p>)}
+          </div>
         </div>
       </Show>
     </div>
