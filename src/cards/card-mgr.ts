@@ -1,13 +1,15 @@
 import { Card } from "./card";
-import { loadCards } from "./cardset-config";
+import { cardSetConfigById, loadCards } from "./cardset-config";
 
 export class CardMgr {
   cardSetId: string;
   cards: Array<any>;
+  config: typeof cardSetConfigById[string];
 
   private constructor(cardSetId: string, cards: Array<any>) {
     this.cardSetId = cardSetId;
     this.cards = cards;
+    this.config = cardSetConfigById[cardSetId];
   }
 
   static async create(cardSetId: string) {
@@ -26,9 +28,9 @@ export class CardMgr {
     const b = this.cards[idx].b;
     // clean this up so it uses the cardset config instead of hardcoding / duplicating!
     if (invert) {
-      return { idx, item1Label: "English", item1:b, item2Label:"Espanol", item2:a, level:0};
+      return { idx, item1Label: this.config.bLabel, item1:b, item2Label:this.config.aLabel, item2:a, level:0};
     }
-    return { idx, item2Label: "English", item2:b, item1Label:"Espanol", item1:a, level:0};
+    return { idx, item1Label:this.config.aLabel, item1:a, item2Label: this.config.bLabel, item2:b, level:0};
   }
 
   markCorrect(card: Card) {
