@@ -25,6 +25,12 @@ export const cardSetConfigs : cardSetConfigT[] = [
     title : "State Capitals",
   },
   {
+    id : "country",
+    aLabel : "Country",
+    bLabel : "Capital",
+    title : "Country Capitals",
+  },
+  {
     id : "mini",
     aLabel : "Espanol",
     bLabel : "English",
@@ -45,6 +51,9 @@ export const loadCards = (cardSetId: string) => {
 
   // @ts-ignore
   if (cardSetId === "states") return import('@/assets/states.csv');
+
+  // @ts-ignore
+  if (cardSetId === "country") return import('@/assets/country.csv');
 
   // @ts-ignore
   if (cardSetId === "mini") return import('@/assets/mini.csv');
